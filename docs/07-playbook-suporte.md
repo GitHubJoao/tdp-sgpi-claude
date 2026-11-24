@@ -133,8 +133,9 @@ Registar aqui o que se confirma ao ler o código (com data e quem confirmou).
 
 - Ações do ecrã: `SearchProjects`, `Save`, `NewManuaPaymentRequest` e **`Delete`**.
 - **`Delete`** apaga `ANALYSIS_EXECUTION_PAYMENT_REQUEST` e depois `EXECUTION_PAYMENT_REQUEST`, numa só transação (se falhar, desfaz tudo). **Não** apaga despesas, documentos nem quitações. Se houver registos ligados por FK, a eliminação falha e é preciso tratá-los primeiro.
-- O ecrã **não** verifica o SICGEST. Antes de apagar, confirmar à mão que `SicGest_DecisionDate` e `SicGest_PayedIn` estão vazios.
-- Atributos editáveis relevantes de `EXECUTION_PAYMENT_REQUEST`:
+- O ecrã **não** verifica o SICGEST. Antes de apagar, confirmar à mão que estão vazios os campos `SentToSicGestIn`, `SicGest_DecisionDate` e `SicGest_PayedIn`. Estes campos estão na **análise** do PP (`ANALYSIS_EXECUTION_PAYMENT_REQUEST`), não no PP.
+- ⚠️ `EXECUTION_PAYMENT_REQUEST.CurrentAnalysisId` aponta para a análise com regra **Protect**. Se estiver preenchido, apagar a análise primeiro (que é o que o Delete faz) pode falhar. Há também outros registos Protect que bloqueiam (documentos, mensagens), e as despesas (`EXECUTION_EXPENSE`) são apagadas **em cascata**. Ver a lista completa em [09-modelo-de-dados.md](09-modelo-de-dados.md#o-que-acontece-ao-eliminar-um-pp).
+- Atributos editáveis relevantes. O ecrã junta os dados do PP e da análise do PP:
   - `Value`, `PayedValue`, `PayedIn`;
   - `SubmitedIn`, `RequestNumber`, `PaymentRequestTypeId`;
   - `DirectorFeedbackDate`, `TechnicianFeedbackDate`.
@@ -158,7 +159,7 @@ Registar aqui o que se confirma ao ler o código (com data e quem confirmou).
 
 - É uma lista de promotores, com pesquisa (`Keyword`) e exportação para Excel. A edição é feita no `PromoterEdit_Popup`.
 - Atributos de `PROMOTER` usados: `Name`, `NIF`, `IBAN`, `NIB`, `IvaSchemeId`, `PromoterTypeId`, `PromoterJuridicTypeId`, entre outros.
-- _Por confirmar:_ se o campo "Nome ou Designação Social" que o promotor vê em "Dados pessoais" é o `PROMOTER.Name` ou o nome do utilizador. É o caso do SGPI-49, em que o cabeçalho está correto e o campo não.
+- _Por confirmar:_ se o campo "Nome ou Designação Social" que o promotor vê em "Dados pessoais" é o `PROMOTER.Name` ou o nome do utilizador. O modelo de dados mostra que `PROMOTER.Id` **é o utilizador**, por isso existem os dois nomes. É a explicação provável para o SGPI-49, em que o cabeçalho está correto e o campo não.
 
 ### Por verificar
 

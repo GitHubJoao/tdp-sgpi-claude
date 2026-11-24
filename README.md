@@ -34,11 +34,26 @@ O Claude Code lê o `CLAUDE.md` e o `.mcp.json` automaticamente.
 
 Também se pode carregar o `CLAUDE.md` e a pasta `docs/` como conhecimento de um Projeto. Quando o repositório mudar, voltar a carregar os ficheiros alterados.
 
+## Fluxos de trabalho
+
+| Fluxo | Cowork / desktop: escrever | Claude Code |
+|---|---|---|
+| Registar emails ou tickets no Jira | *"Segue prompts/registar-pedido.md"* | `/registar-pedido` |
+| Preparar a resolução de um ticket | *"Segue prompts/resolver-suporte.md para o SGPI-59"* | `/resolver-suporte SGPI-59` |
+| Validar no browser e no Service Center | *"Segue prompts/validar.md para o SGPI-59, depois"* | `/validar SGPI-59 depois` |
+
+Para os ter como comandos `/` no Claude Code, copiar uma vez (Windows):
+
+```
+xcopy prompts .claude\commands\ /I /Y
+```
+
 ## Estrutura
 
 ```text
 CLAUDE.md                      ← instruções para o agente (ler primeiro)
 docs/
+  00-glossario.md              ← siglas e termos
   01-contexto.md               ← contrato, equipa, acordos
   02-fluxo-de-pedidos.md       ← email → OTRS → Jira
   03-jira.md                   ← JQL, tipos, estados, labels
@@ -47,6 +62,8 @@ docs/
   06-validacao-browser.md      ← aplicação e Service Center
   07-playbook-suporte.md       ← como resolver cada tipo de pedido + notas verificadas
   08-triagem-tickets.md        ← retrato do backlog e ordem sugerida
+  09-modelo-de-dados.md        ← entidades, relações e regras de eliminação
+prompts/                       ← fluxos repetidos (registar-pedido, resolver-suporte, validar)
 tools/servicestudio-open-mcp/  ← servidor MCP para abrir módulos no Service Studio
 config/                        ← exemplo de configuração para o Claude desktop
 .mcp.json                      ← servidores MCP para o Claude Code
