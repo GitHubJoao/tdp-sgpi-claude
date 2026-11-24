@@ -1,0 +1,8 @@
+# Alterações às regras do agente e à configuração dos MCP pedem revisão do gestor de projeto.
+# (Só tem efeito com proteção de branch ativa.)
+/CLAUDE.md          @GitHubJoao
+/.mcp.json          @GitHubJoao
+/config/            @GitHubJoao
+/tools/             @GitHubJoao
+/.github/           @GitHubJoao
+/.gitleaks.toml     @GitHubJoao

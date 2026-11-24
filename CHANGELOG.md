@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-24 (4)
+
+- `docs/templates/`: comentário de resolução no Jira e emails de pedido de aprovação, de confirmação e fecho e de anúncio em TEST.
+- Segurança: GitHub Action gitleaks (`setup/github/workflows/gitleaks.yml`), `.gitleaks.toml` (exceção para as eSpaceKeys) e `CODEOWNERS`.
+- `setup/instalar.cmd`: copia `prompts/` para `.claude/commands/` e `setup/github/` para `.github/`.
+
 ## 2026-11-24 (3)
 
 - `docs/00-glossario.md`: siglas e termos.

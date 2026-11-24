@@ -1,0 +1,14 @@
+# Configuração do gitleaks: regras por defeito + exceções do projeto.
+title = "tdp-sgpi-claude"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Identificadores públicos, não secretos"
+regexes = [
+  # eSpaceKeys dos módulos OutSystems (GUIDs), documentados em docs/05 e docs/09
+  '''[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}''',
+  # parâmetro de URL das minutas (HIRING/..._ContractDraft?...&token=2)
+  '''token=2''',
+]

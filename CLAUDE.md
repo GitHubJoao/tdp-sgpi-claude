@@ -25,7 +25,9 @@ Em [`prompts/`](prompts/) estão os fluxos repetidos. Quando o utilizador pedir 
 | Preparar a resolução de um ticket de suporte | [`prompts/resolver-suporte.md`](prompts/resolver-suporte.md) |
 | Validar uma correção no browser e no Service Center | [`prompts/validar.md`](prompts/validar.md) |
 
-No Claude Code também se podem usar como comandos (`/registar-pedido`, `/resolver-suporte SGPI-59`, `/validar SGPI-59 depois`), depois de copiados para `.claude/commands/` (ver o README).
+Modelos de texto (comentário de resolução no Jira, emails de aprovação, de fecho e de anúncio em TEST): [`docs/templates/`](docs/templates/). Usa-os quando preparares evidência ou comunicações.
+
+No Claude Code também se podem usar como comandos (`/registar-pedido`, `/resolver-suporte SGPI-59`, `/validar SGPI-59 depois`), depois de copiados para `.claude/commands/` (o `setup/instalar.cmd` faz a cópia; ver o README).
 
 Lê só o que a tarefa pede: um pedido de suporte precisa de 02, 03, 05, 07 e 09; uma validação precisa de 06.
 

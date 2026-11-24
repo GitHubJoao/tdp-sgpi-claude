@@ -29,6 +29,15 @@ Este repositório é escrito por pessoas e por sessões do Claude. Mantém-no **
 | Ordem de trabalho, esforço | `docs/08-triagem-tickets.md` |
 | Regras para o agente | `CLAUDE.md` (alterar com cuidado) |
 
+## Verificação de segredos
+
+A GitHub Action gitleaks (instalada com `setup/instalar.cmd`) verifica cada push. Se acusar um segredo:
+
+1. **Revogar ou mudar o segredo de imediato.** Apagar o commit não chega, porque o segredo fica no histórico.
+2. Reescrever o histórico só com acordo do gestor de projeto.
+
+Os falsos positivos acrescentam-se à `allowlist` do `.gitleaks.toml`.
+
 ## Fluxo
 
 1. `git pull` antes de começar.

@@ -42,11 +42,27 @@ Também se pode carregar o `CLAUDE.md` e a pasta `docs/` como conhecimento de um
 | Preparar a resolução de um ticket | *"Segue prompts/resolver-suporte.md para o SGPI-59"* | `/resolver-suporte SGPI-59` |
 | Validar no browser e no Service Center | *"Segue prompts/validar.md para o SGPI-59, depois"* | `/validar SGPI-59 depois` |
 
-Para os ter como comandos `/` no Claude Code, copiar uma vez (Windows):
+## Instalação única (depois de clonar)
+
+As ferramentas remotas do Claude não podem escrever em `.claude/` nem em `.github/`. Por isso há um script que copia esses ficheiros, e só é preciso corrê-lo uma vez:
 
 ```
-xcopy prompts .claude\commands\ /I /Y
+setup\instalar.cmd
+git add .claude .github && git commit -m "setup: comandos e gitleaks" && git push
 ```
+
+O script copia:
+
+- `prompts/` para `.claude/commands/`, para ter os comandos `/registar-pedido`, `/resolver-suporte` e `/validar` no Claude Code;
+- `setup/github/` para `.github/`:
+  - a GitHub Action **gitleaks**, que verifica segredos em cada push, sobre o histórico completo, com a configuração em `.gitleaks.toml`;
+  - o `CODEOWNERS`.
+
+Se mais tarde alterares `prompts/` ou `setup/github/`, corre o script outra vez.
+
+### Proteção do branch `main` (opcional)
+
+Em **Settings → Branches → Add rule** para `main`: *Require a pull request before merging*, *Require review from Code Owners* e *Require status checks: gitleaks*. Num repositório privado de conta pessoal, a GitHub só permite isto com o plano **Pro**. No plano grátis, o gitleaks continua a correr e a marcar o commit a vermelho, mas não bloqueia o push.
 
 ## Estrutura
 
@@ -64,6 +80,9 @@ docs/
   08-triagem-tickets.md        ← retrato do backlog e ordem sugerida
   09-modelo-de-dados.md        ← entidades, relações e regras de eliminação
 prompts/                       ← fluxos repetidos (registar-pedido, resolver-suporte, validar)
+docs/templates/                ← comentário de resolução no Jira e emails (aprovação, fecho, anúncio em TEST)
+setup/                         ← instalar.cmd + ficheiros para .github/ (gitleaks, CODEOWNERS)
+.gitleaks.toml                 ← regras do gitleaks
 tools/servicestudio-open-mcp/  ← servidor MCP para abrir módulos no Service Studio
 config/                        ← exemplo de configuração para o Claude desktop
 .mcp.json                      ← servidores MCP para o Claude Code
