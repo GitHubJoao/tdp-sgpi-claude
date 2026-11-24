@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "outsystems": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "http://127.0.0.1:41820/mcp"]
+    },
+    "servicestudio-open": {
+      "command": "node",
+      "args": ["C:\\Users\\<utilizador>\\tdp-sgpi-claude\\tools\\servicestudio-open-mcp\\server.js"],
+      "env": { "SERVICESTUDIO_HOST": "outsystems-dev.turismodeportugal.pt" }
+    }
+  }
+}

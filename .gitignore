@@ -1,0 +1,12 @@
+# Nunca versionar segredos nem dados de clientes
+.env
+*.env
+*secret*
+*password*
+*.oml
+*.xlsx
+*.docx
+*.pdf
+node_modules/
+.DS_Store
+Thumbs.db

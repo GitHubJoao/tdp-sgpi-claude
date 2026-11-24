@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "outsystems": {
+      "type": "http",
+      "url": "http://127.0.0.1:41820/mcp"
+    },
+    "servicestudio-open": {
+      "command": "node",
+      "args": ["tools/servicestudio-open-mcp/server.js"],
+      "env": { "SERVICESTUDIO_HOST": "outsystems-dev.turismodeportugal.pt" }
+    }
+  }
+}
