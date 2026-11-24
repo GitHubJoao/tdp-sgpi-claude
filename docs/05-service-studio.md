@@ -33,6 +33,7 @@ Se uma key mudar ou faltar um módulo, procurar com `searchApps` e `{ "applicati
 
 ## Regras de edição
 
+- **Todo o desenvolvimento é feito em DEV** (`outsystems-dev.turismodeportugal.pt`). Antes de editar, confirmar que o ambiente devolvido por `searchApps` é DEV; se o Service Studio estiver ligado a outro ambiente, parar e avisar. TEST e PROD só recebem versões promovidas a partir de DEV (LifeTime / processo do TdP), nunca alterações diretas.
 - **Só com pedido explícito.** Por defeito, as sessões são de leitura.
 - `startOmlEditSession` → `applyModelApiCode` (várias vezes) → `omlMerge`. O developer revê em *Compare and Merge*.
 - Nunca usar `omlPublish` sem ordem expressa. Nunca publicar em PROD a partir do agente.

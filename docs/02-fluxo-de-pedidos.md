@@ -32,6 +32,6 @@ Para cada email de ticket, ou cada email do TdP com um pedido de desenvolvimento
 
 1. Refinar o pedido (análise) e fazer a estimativa.
 2. O TdP aprova a estimativa.
-3. Desenvolver em DEV. As alterações de código passam por *Compare and Merge*.
+3. Desenvolver **sempre em DEV**, nunca diretamente em TEST ou PROD. As alterações de código passam por *Compare and Merge*.
 4. Passar a TEST e anunciar ao Rui Veloso.
 5. Passar a PROD a partir das 18h.

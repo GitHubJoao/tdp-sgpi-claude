@@ -17,6 +17,7 @@ Lê só o que a tarefa pede: um pedido de suporte precisa de 02, 03, 05 e 07; um
 
 ## Regras para o agente (obrigatórias)
 
+- **Desenvolvimento sempre em DEV** (`outsystems-dev.turismodeportugal.pt`). Nunca desenvolver, editar código nem fazer merge/publish noutro ambiente; TEST e PROD só recebem versões promovidas a partir de DEV. Antes de editar, confirmar com `listOpenModules`/`searchApps` que o Service Studio está ligado a DEV.
 - **Por defeito, só leitura.** Não alterar dados, código, tickets nem estados sem pedido explícito de quem está na sessão.
 - **Código OutSystems:** editar só com pedido explícito. Toda a alteração passa por `omlMerge` e é revista pelo developer em *Compare and Merge*. Nunca usar `omlPublish` sem ordem expressa.
 - **Produção:** correções de dados em PROD precisam de aprovação **antes**; depois pede-se confirmação a quem abriu o ticket. Deploys para PROD só a partir das 18h.

@@ -6,7 +6,7 @@ Usar o browser que estiver disponível na sessão: Claude in Chrome (o Chrome do
 
 | Ambiente | Host | Notas |
 |---|---|---|
-| DEV | `outsystems-dev.turismodeportugal.pt` | Ambiente do Service Studio. É o único confirmado até agora. |
+| DEV | `outsystems-dev.turismodeportugal.pt` | **Único ambiente onde se desenvolve.** É o do Service Studio. |
 | TEST | _a confirmar_ | É aqui que as novidades se anunciam ao Rui Veloso. |
 | PROD | _a confirmar_ | Correções de dados só com aprovação. Deploys a partir das 18h. |
 
