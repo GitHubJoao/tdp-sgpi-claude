@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-25
+
+- Glossário: PTA, PTRI e PTRF confirmados na estática `S_EXECUTION_PAYMENT_REQUEST_TYPE`.
+
 ## 2026-11-24 (4)
 
 - `docs/templates/`: comentário de resolução no Jira e emails de pedido de aprovação, de confirmação e fecho e de anúncio em TEST.

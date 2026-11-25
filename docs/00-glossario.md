@@ -39,7 +39,7 @@ Termos e siglas que aparecem nos tickets, nos ecrãs e no código do SGPI. Onde 
 | **ESB** | Equivalente de subvenção bruta. Depende da data do 1.º pagamento. |
 | **OP / OD** | Ordem de pagamento / ordem de devolução |
 | **Despesa / quitação** | Fatura e o respetivo comprovativo de pagamento (`EXECUTION_EXPENSE`) |
-| **PTRF** | Usado nos pedidos de pagamento finais _(a confirmar)_ |
+| **PTA / PTRI / PTRF** | Códigos PT2020 dos tipos de PP (`S_EXECUTION_PAYMENT_REQUEST_TYPE.Type_2020`): **PTA** = adiantamentos (simples, contra garantia, com isenção de garantia, contra contrato/TA); **PTRI** = pagamento intercalar; **PTRF** = pagamento final e correção ao encerramento. **D** = devoluções. |
 | **ROC / TOC** | Revisor oficial de contas / técnico oficial de contas. Certificam as despesas. |
 | **Vistoria** | Verificação no local, na fase de execução (`INSPECTION`) |
 | **Encerramento** | Fecho do processo depois do PP final |
