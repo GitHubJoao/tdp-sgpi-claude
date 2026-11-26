@@ -38,6 +38,14 @@ Para chegar a um ecrã que recebe Ids (por exemplo `AnalysisExecPPFeedbackTextEd
 | Versão publicada de um módulo e quem a publicou | Factory → **Modules** → `SGPI2_*` → Versions |
 | Variáveis de configuração (site properties) | Factory → módulo → **Site Properties** |
 
+## O que os logs mostram (e o que não mostram)
+
+- **Validações de negócio não ficam nos logs.** As mensagens mostradas com `Feedback_Message` (por exemplo o «!» do parecer, ou *«Só pode submeter…»*) não deixam registo. Se o Error Log estiver limpo, a causa é quase sempre uma destas validações. Nesse caso, ver o estado e os dados do processo.
+- **Só há registo nas exceções:** handlers `AllExceptions` com `LogError = True`. Nestes casos o utilizador vê a mensagem genérica (`Site.ErrorMessage`).
+- **Ruído habitual, que se pode ignorar:**
+  - `… role required` em GET sem utilizador (o `CheckPermissions` normal);
+  - `A POST was made without executing any action!`: submissões a partir de uma página desatualizada (botão "voltar" ou vários separadores). A ação não chega a correr.
+
 ## Validar uma correção
 
 1. **Antes:** tirar um print do ecrã afetado (área do técnico ou do promotor) e guardá-lo no ticket.

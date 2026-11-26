@@ -161,6 +161,31 @@ Registar aqui o que se confirma ao ler o código (com data e quem confirmou).
 - Atributos de `PROMOTER` usados: `Name`, `NIF`, `IBAN`, `NIB`, `IvaSchemeId`, `PromoterTypeId`, `PromoterJuridicTypeId`, entre outros.
 - _Por confirmar:_ se o campo "Nome ou Designação Social" que o promotor vê em "Dados pessoais" é o `PROMOTER.Name` ou o nome do utilizador. O modelo de dados mostra que `PROMOTER.Id` **é o utilizador**, por isso existem os dois nomes. É a explicação provável para o SGPI-49, em que o cabeçalho está correto e o campo não.
 
+### `SGPI2_ANALYSIS/Constraints`: submeter o parecer técnico (26/11/2026, SGPI-131)
+
+- O formulário do parecer (Parecer, Informação de serviço nº, Data, condicionantes, **Submeter Parecer**) é o bloco **`Constraints`**, dentro de `TechnicianAnalisys`. O ecrã do diretor (`DirectorAnalysis_Feedback`) é outro.
+- **O «!» ao lado de «Submeter Parecer» tem dois casos:**
+  1. Há mensagens de validação e o parecer ≠ Não elegível: o «!» é um **link** para um popup com `ValidationMessage` + `FinancingValidationMessage` + `IncentiveValidationMessage`. Estas mensagens são calculadas no `ProjectAnalisys_Block` a partir dos `CheckModule_ProjectData`, `ElegibilityConditions`, `InvestmentMap`, `ProjectBPF`, `FinancingMap` e `Incentive`. Ao submeter aparece *«Só pode submeter o parecer quando não existirem mensagens de erro.»*
+  2. Não há mensagens, mas o processo está em **«Pedido de esclarecimentos»** (`ClarificationRequest`): o «!» é só uma imagem com o tooltip *«Só pode submeter o parecer quando fechar os esclarecimentos complementares.»* Resolve-se com «Fechar esclar. comp.» ou repondo «Análise técnica».
+- **Outras mensagens:**
+  - texto vazio → *«Introduza o texto do parecer»*;
+  - falha na `StatusMachine` → *«Erro ao gravar o parecer, contacte a administração»*.
+- A **data não é validada**: ao submeter, `TechnicianFeedbackDate` recebe a data atual (`CurrDateTime()`). O mesmo acontece com `DirectorFeedbackDate` no ecrã do diretor.
+- **Primeiro passo:** ver o estado do processo em `ProjectEdit`. Se não esclarecer, pedir ao utilizador o print do popup do «!».
+
+### Cálculo do PP e bloqueio por despesas a justificar (25/11/2026, SGPI-85)
+
+- **Onde está:**
+  - promotor: `SGPI2_BUSINESSLAYER/PaymentRequest_RecalculateValue`;
+  - análise: `SGPI2_EXECUTION/A_PaymentRequest_RecalculateValue`. A regra é a mesma.
+- **Como calcula:**
+  - `TotalRequested` soma os PP anteriores submetidos e **pagos** (`PayedIn`), com parecer do diretor Elegível e `ExistPayment = True`.
+  - `TotalCalculatedValue` soma as despesas × a taxa. Uma despesa só conta se `EXECUTION_EXPENSE.AnalysisExecInvestmentId` for **o Id exato de uma linha atual** do mapa (`IsCurrent`, não apagada, não nova proposta) e se a data do documento estiver dentro do período de execução. A correspondência por designação, tipo e data só se usa no VALORIZAR.
+  - Se `TotalCalculatedValue − TotalRequested < 0`, `ExpensesToJustify > 0` e o promotor fica bloqueado.
+- ⚠️ **Despesas ligadas a uma versão anterior do mapa deixam de contar.** Isto acontece depois de um ajuste ou de uma nova versão (`Analysis_Exec_Invest_Map_CreateVersion`), e é a causa provável dos casos «o PP não considera a despesa do PP anterior».
+- No lado da análise, o ramo «Adiantamento?» só testa o tipo `Adiantamento` simples. Os outros tipos PTA não entram nele.
+- **«Certificação» pode querer dizer outra coisa:** a `SGPI2_BUSINESSLAYER/Execution_CheckCertificationsValidate` só verifica se as certidões **SS e AT** (`I_EXECUTION_BANK_ELEMENTS.SocialSecurityValDate` / `FiscalAdminValDate`) estão válidas hoje. Verificar isto primeiro.
+
 ### Por verificar
 
 - `ProjectEdit` / `ProjectEdit3`: o MCP dá "Specified cast is not valid". Falta ver se o ecrã regista o histórico (`PROJECT_HISTORY`).

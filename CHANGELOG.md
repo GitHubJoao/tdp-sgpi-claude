@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-26
+
+- Playbook: notas verificadas sobre a submissão do parecer técnico (bloco `Constraints`, os dois casos do «!», SGPI-131) e sobre o cálculo do PP / `ExpensesToJustify` / certidões SS e AT (SGPI-85).
+- Validação: o que os logs de PROD mostram e não mostram, e o ruído habitual.
+
 ## 2026-11-25
 
 - Glossário: PTA, PTRI e PTRF confirmados na estática `S_EXECUTION_PAYMENT_REQUEST_TYPE`.
