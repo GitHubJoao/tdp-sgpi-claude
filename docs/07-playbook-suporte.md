@@ -184,6 +184,13 @@ Registar aqui o que se confirma ao ler o código (com data e quem confirmou).
   - Se `TotalCalculatedValue − TotalRequested < 0`, `ExpensesToJustify > 0` e o promotor fica bloqueado.
 - ⚠️ **Despesas ligadas a uma versão anterior do mapa deixam de contar.** Isto acontece depois de um ajuste ou de uma nova versão (`Analysis_Exec_Invest_Map_CreateVersion`), e é a causa provável dos casos «o PP não considera a despesa do PP anterior».
 - No lado da análise, o ramo «Adiantamento?» só testa o tipo `Adiantamento` simples. Os outros tipos PTA não entram nele.
+- **Taxa de incentivo usada no cálculo** (também em `A_InvestmentGetIncentivePercentage`, 26/11/2026, SGPI-88):
+  - se existir um `PROJECT_INVEST_ADJUST` (ajuste à decisão) na análise atual, usa `Total_IncentivePercentage`;
+  - senão, usa `ANALYSIS_PROJECT.TotalIncentivePercentage` da análise atual (`PROJECT.CurrentAnalysisId`).
+  - **Taxa 0** → tudo fica a 0 → `TotalFinal = 0 − já pago < 0` → num PP final é tratado como **devolução**. Ver primeiro se há um ajuste com a taxa vazia, ou uma reanálise sem a taxa gravada (gravar outra vez o mapa).
+  - ⚠️ Com vários ajustes, as queries não escolhem o mais recente (o `A_InvestmentGetIncentivePercentage` ordena por Id ascendente) → pode ser usado o primeiro ajuste.
+  - Medidas que **não** calculam o PP por despesas (`Final = disponível − pago`): MI_INTERIOR, QREN, Protocolo Bancário (todas as edições), PT2020, REPOR, CGEI, Tesouraria COVID, VALORIZAR (incêndios 2017), contrato do tipo 3. Uma linha fora desta lista e sem despesas dá sempre um valor negativo.
+  - Ecrãs: `ADMINISTRATION/ProjectInvestAdjusts`, `ProjectIncentivetaxs`.
 - **«Certificação» pode querer dizer outra coisa:** a `SGPI2_BUSINESSLAYER/Execution_CheckCertificationsValidate` só verifica se as certidões **SS e AT** (`I_EXECUTION_BANK_ELEMENTS.SocialSecurityValDate` / `FiscalAdminValDate`) estão válidas hoje. Verificar isto primeiro.
 
 ### Por verificar

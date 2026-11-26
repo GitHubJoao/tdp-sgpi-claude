@@ -2,6 +2,7 @@
 
 ## 2026-11-26
 
+- Playbook: regra da taxa de incentivo no cálculo do PP (ajuste à decisão vs. análise; taxa 0 → devolução; medidas sem despesas) (SGPI-88).
 - Playbook: notas verificadas sobre a submissão do parecer técnico (bloco `Constraints`, os dois casos do «!», SGPI-131) e sobre o cálculo do PP / `ExpensesToJustify` / certidões SS e AT (SGPI-85).
 - Validação: o que os logs de PROD mostram e não mostram, e o ruído habitual.
 
